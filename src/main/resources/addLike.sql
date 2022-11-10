@@ -1,0 +1,1 @@
+INSERT INTO "like" (user_id, post_id ,comment_id) VALUES (?,?,?);

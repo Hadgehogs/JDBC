@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS "user" (id serial Primary key, name varchar(150) not null unique CHECK(name !=''),password varchar(150) not null CHECK(password !=''),created_at timestamp not null DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE IF NOT EXISTS post (id serial Primary key, text varchar(550) not null CHECK(text !=''),created_at timestamp not null DEFAULT CURRENT_TIMESTAMP, user_id integer references "user"(id));
+CREATE TABLE IF NOT EXISTS comment (id serial Primary key, text varchar(550) not null CHECK(text !=''),post_id integer references post(id), user_id integer references "user"(id), created_at timestamp not null DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE IF NOT EXISTS "like"  (id serial Primary key,user_id integer references "user"(id),post_id integer references post(id),comment_id integer references comment(id), CONSTRAINT must_Fill_any_key CHECK((post_id <> 0 and not post_id is NULL) or (comment_id <>0 and not comment_id is NULL)));
